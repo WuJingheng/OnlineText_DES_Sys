@@ -1,0 +1,23 @@
+body{
+  position: relative;
+}
+.footer{
+  position: absolute;
+  bottom:0px;
+  color:#808080;
+}
+p{
+  display: inline;
+}
+.limit{
+  color: rgb(255, 0, 0);
+}
+textarea{
+  height:50px;
+  width:80px;
+}
+/* input:disabled{
+    border: 1px solid #DDD;
+    background-color: #F5F5F5;
+    color:#ACA899;
+} */
