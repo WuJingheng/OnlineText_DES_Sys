@@ -21,6 +21,11 @@ function des_encrypt($plainStr){
     $plainStr = substr_replace($plainStr,substr($plainStrSafe,(int)$arrIP[$i]-1,1),$i,1);
   }
 
+  //分左右半区
+  $leftSide =
+  $rideSide =
+  
+
 
   //return $cipherStr;
 }
