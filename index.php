@@ -5,7 +5,7 @@
   <head>
     <title>DES Encryption/Decryption System</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" href="res/favicon.ico"/>
+    <link rel="shortcut icon" href="../res/favicon.ico"/>
     <link href="style/style.css" type="text/css" rel="Stylesheet" />
     <script type="text/javascript" src="js/limit.js"></script>
   </head>

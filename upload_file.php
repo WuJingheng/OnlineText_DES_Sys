@@ -1,5 +1,6 @@
 <?php
   require('charOperation.php');
+  require('des.php');
 
   //获取字符串
   $strOriginal = $_POST["textarea"];
@@ -17,6 +18,13 @@
   $key = $_POST['key'];
   //echo("<script>console.log('Encryption Key:" . $key . "');</script>");
 
+  //处理密码
+  $key = fillString($key);
+  $fullKey = str_repeat($key,4);
+  $fullKeyinBin = strToBin($fullKey);
+  //echo "Full Key in Binary: ";echo '<br/>';echo $fullKeyinBin;echo '<br/>';
+  //echo strlen($fullKeyinBin);
+
   //临时测试区域
   //echo (9%2);
   //echo strlen($strOriginal);
@@ -26,16 +34,27 @@
 
     //行分解 变数组
     $rowAfterSplit = splitRows($strOriginal);
-    echo "split done";
 
     //行补足 数组
     $rowAfterFill = fillRows($rowAfterSplit);
 
     //行数据转二进制 数组
-    //$rowFilledBin = str2Bin($rowAfterFill);
+    $rowFilledBin = str2Bin($rowAfterFill);
 
+    //至此数据处理完成 DES算法部分
+    foreach ($rowFilledBin as $eachRow) {
 
-    print_r($rowAfterFill);
+      for($i = 0; $i < strlen($eachRow)/64; $i++){
+        $plainText64bit = substr($eachRow, $i * 64, 64);
+
+        //测试输出64位字符
+        echo "splainText in Bin:";echo '<br/>';echo $plainText64bit;echo '<br/>';
+
+        $textAfterIP = des_encrypt($plainText64bit);
+
+        //$plainText64bit =
+      }
+    }
 
   }
 
@@ -44,7 +63,7 @@
   <head>
     <title>DES Encryption/Decryption System</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" href="res/favicon.ico"/>
+    <link rel="shortcut icon" href="../res/favicon.ico"/>
     <link href="style/style.css" type="text/css" rel="Stylesheet" />
     <script type="text/javascript" src="js/pageAnimation.js"></script>
 

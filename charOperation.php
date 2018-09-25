@@ -8,7 +8,7 @@ function fillString($strOriginal){
     $str8Times = $strOriginal;
     $remainder = strlen($strOriginal) % 8;
     for ($i=0; $i < 8 - $remainder; $i++) {
-      $str8Times = $str8Times." ";
+      $str8Times = $str8Times."0";
     }
   }
   return $str8Times;
@@ -43,5 +43,30 @@ function str2Bin($arr){
   }
   return $arrTmp;
 }
+
+/**
+ * 将字符串转换成二进制
+ * @param type $str
+ * @return type
+ */
+ function strToBin($str){
+   //1.列出每个字符
+   $arr = preg_split('/(?<!^)(?!$)/u', $str);
+   //2.unpack字符
+   foreach($arr as &$v){
+       //
+       $temp = unpack('H*', $v);
+
+       $v = base_convert($temp[1], 16, 2);
+       //echo("<script>console.log(' 16-2 :" . $v . "');</script>");
+
+       $v = str_pad($v,8,"0",STR_PAD_LEFT);
+       //echo("<script>console.log(' 2+0  :" . $v . "');</script>");
+
+       unset($temp);
+   }
+   return join('',$arr);
+ }
+
 
 ?>
