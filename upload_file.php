@@ -20,13 +20,14 @@
 
   //处理密码
   $key = fillString($key);
-  $fullKey = str_repeat($key,4);
+  $fullKey = str_repeat($key,6);
   $fullKeyinBin = strToBin($fullKey);
   //echo "Full Key in Binary: ";echo '<br/>';echo $fullKeyinBin;echo '<br/>';
   //echo strlen($fullKeyinBin);
 
   //临时测试区域
-  //echo (9%2);
+  // $test = (1+1)%2;
+  // echo "1+1%2".$test.'<br/>';
   //echo strlen($strOriginal);
 
   //加密模式下
@@ -46,11 +47,26 @@
 
       for($i = 0; $i < strlen($eachRow)/64; $i++){
         $plainText64bit = substr($eachRow, $i * 64, 64);
+        //初始置换
+        $textAfterIP = des_encrypt_IP($plainText64bit);
+        //分左右半区
+        $leftSide_00 = substr($textAfterIP,0,32);
+        $rightSide_00 = substr($textAfterIP,32,32);
+        //第一轮
+          //拓展置换
+        $rightSide_00 = des_encrypt_EP($rightSide_00);
+        echo "扩展：".$rightSide_00.'<br/>';
+          //获取48位密码
+        $key01 = substr($fullKeyinBin,0,48);
+        echo "密码：".$key01.'<br/>';
 
-        //测试输出64位字符
-        echo "splainText in Bin:";echo '<br/>';echo $plainText64bit;echo '<br/>';
+          //XOR运算
+        $resultXOR = calculateXOR($rightSide_00,$key01);
+        echo "结果：".$resultXOR.'<br/>';
+          //S盒压缩
 
-        $textAfterIP = des_encrypt($plainText64bit);
+
+
 
         //$plainText64bit =
       }
