@@ -69,6 +69,10 @@
     document.getElementById('download').style.display = "inline";
     document.getElementById('backToHome').style.display = "inline";
   }
+  //显示文本框
+  function showText(){
+    document.getElementById('textarea_output').style.display = "inline";
+  }
   //删除Starting
   function delStarting(){
     document.getElementById('starting').style.display = "none";
@@ -139,4 +143,5 @@
 
     //显示下载
     setTimeout("showDone()","5000");
+    setTimeout("showText()","5000");
   }

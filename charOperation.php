@@ -76,4 +76,16 @@ function colInSBox($num1,$num2,$num3,$num4){
   return $num1 * 8 + $num2 * 4 + $num3 * 2 + $num4;
 }
 
+function binToStr($str){
+  $arr = Array();
+  for ($tmp=0; $tmp < strlen($str) / 8; $tmp++) {
+    $arr[$tmp] = substr($str, 8 * $tmp, 8);
+  }
+  foreach($arr as &$v){
+    $temp = unpack('H*', $v); $v = base_convert($temp[1], 16, 2);
+    unset($temp);
+  }
+
+}
+
 ?>
