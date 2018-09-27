@@ -35,6 +35,9 @@
   //加密模式下
   if($radioState == "Encryption"){
 
+    $myfile = fopen("tmp.txt","w");
+    fwrite($myfile, $strOriginal);
+    fclose($myfile);
     //行分解 变数组
     $rowAfterSplit = splitRows($strOriginal);
     // echo "行分解".$rowAfterSplit.'<br/>';
@@ -97,6 +100,9 @@
 
   }else {
     //解密模式
+    $myfile = fopen("tmp.txt","r");
+    $rowCipher = fread($myfile,filesize("tmp.txt"));
+    fclose($myfile);
 
   }
 
